@@ -24,6 +24,7 @@ export default {
       },
       fontFamily: {
         sans: [
+          "Noto Sans Thai Variable",
           "Noto Sans Thai",
           "IBM Plex Sans Thai",
           "system-ui",

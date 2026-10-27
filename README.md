@@ -49,6 +49,27 @@ npm run dev        # เปิด http://localhost:5173
 
 Vite ตั้ง proxy `/api` → `http://127.0.0.1:5050` ให้อัตโนมัติแล้ว (แก้ได้ใน `vite.config.ts`)
 
+### 3) Production (VPS)
+
+`npm run dev` ใช้เฉพาะเครื่องพัฒนา — ห้ามใช้เป็นเซิร์ฟเวอร์จริง เพราะจะโหลดช้ามาก
+
+```bash
+cd frontend
+npm ci --include=dev     # ต้องมี dev deps สำหรับ build (สำคัญถ้า NODE_ENV=production)
+npm run build
+npm run start            # เสิร์ฟ dist บนพอร์ต 5173 + proxy /api → 127.0.0.1:5050
+```
+
+- `npm run start` ใช้ `server.mjs` (ไม่ต้องพึ่ง nginx) — มี gzip/brotli, cache header และ SPA fallback
+- ปรับ `PORT`, `HOST`, `API_TARGET` ผ่าน env ได้
+- ต้องรัน `npm run build` ใหม่ทุกครั้งหลังแก้โค้ด แล้วค่อย restart process
+
+หรือเปิดทั้ง backend + frontend พร้อมกันจาก root (สคริปต์สำหรับ VPS ที่ใช้ `screen`):
+
+```bash
+./start.sh   # ติดตั้ง deps + build production + start ทั้งสองตัว
+```
+
 > ⚠️ **ผู้ใช้ macOS:** ห้ามใช้พอร์ต 5000 — macOS AirPlay Receiver (ControlCenter) ยึดพอร์ตนี้ไว้ ทำให้ proxy ชนกันโดยไม่มี error ชัดเจน
 
 ### 3) ทดสอบ

@@ -28,7 +28,8 @@ body {
   margin: 0;
   background-color: var(--bg-main);
   color: var(--text);
-  font-family: "Noto Sans Thai", "IBM Plex Sans Thai", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: "Noto Sans Thai Variable", "Noto Sans Thai", "IBM Plex Sans Thai", system-ui, -apple-system,
+    "Segoe UI", sans-serif;
   line-height: 1.7;
   word-break: break-word;
   overflow-wrap: break-word;
